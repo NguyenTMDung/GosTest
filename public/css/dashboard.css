@@ -1,0 +1,169 @@
+/* === Base Reset === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+/* === Header === */
+.header {
+    height: 100px;
+    display: flex;
+    justify-content: center;  /* căn giữa ngang */
+    align-items: center; 
+    border-bottom: 1px solid #dee2e6;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0 20px;
+}
+.bg-primary {
+    background-color: #0e4a8a !important;
+}
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030; /* Đảm bảo hiển thị trên nội dung khác */
+}
+
+/* === Sidebar === */
+.sidebar {
+    background: linear-gradient(to bottom, #d0dfee, #357fcf);
+    position: fixed;
+    left: 0;
+    height: calc(100% - 60px);
+    padding: 20px;
+    border-right: 1px solid #dee2e6;
+    transition: left 0.3s ease-in-out;
+    z-index: 999;
+    width: 20%;
+}
+
+/* Sidebar nội dung */
+.sidebar h5, menu h5 {
+    margin-bottom: 1rem;
+}
+.sidebar ul, menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+.sidebar a, menu a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+}
+.sidebar a:hover, .menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.fw-bold{
+    display: flex;
+    justify-content: center;  /* căn giữa ngang */
+    align-items: center; 
+}
+/* === Main Content === */
+.content {
+    margin-left: 20px;
+    padding: 80px 20px 20px; /* 60px header + padding */
+}
+.overlay {
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+/* === Card styling === */
+.card {
+    margin-top: 20px;
+}
+@media (min-width: 1028px) {
+    main {
+    width: 80% !important;
+}
+}
+
+/* === Responsive < 1028px === */
+@media (max-width: 1027px) {
+    .sidebar {
+        width: 30%;
+        left: -100%;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    main {
+        width: 100%;
+        margin-left: 0;
+        transition: margin-left 0.3s ease;
+        margin: 0 auto;
+    }
+
+    main.shifted {
+        margin-left: 30% !important;
+        width: 70%;
+    }
+
+    #hamburger {
+        display: block !important;
+    }
+}
+
+/* Ẩn hamburger mặc định */
+#hamburger {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .sidebar.open {
+        left: 0; /* khi mở sidebar trượt vào */
+    }
+
+    .overlay {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #d0dfee;
+        z-index: 1040; /* thấp hơn sidebar */
+        display: none;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .overlay.active {
+        display: block;
+    }
+
+    main {
+        width: 100%;
+        margin-left: 0;
+        transition: none;
+        margin: 0 auto;
+    }
+
+    #hamburger {
+        display: block !important;
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        z-index: 1100;
+        cursor: pointer;
+        font-size: 24px;
+        user-select: none;
+    }
+}
+
+.alert{
+    margin-top: 20px;
+}
