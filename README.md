@@ -5,10 +5,10 @@ Dự án Laravel tích hợp Docker.
 
 ### 🛠️ 1. Clone project
 
-```bash
 git clone https://github.com/NguyenTMDung/GosTest.git
 cd GosTest
-⚙️ 2. Tạo file .env
+
+###⚙️ 2. Tạo file .env
 bash
 Sao chép
 Chỉnh sửa
