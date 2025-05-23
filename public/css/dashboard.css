@@ -7,7 +7,6 @@ body {
 
 /* === Header === */
 .header {
-    height: 100px;
     display: flex;
     justify-content: center;  /* căn giữa ngang */
     align-items: center; 
@@ -36,7 +35,7 @@ body {
     background: linear-gradient(to bottom, #d0dfee, #357fcf);
     position: fixed;
     left: 0;
-    height: calc(100% - 60px);
+    height: calc(100%);
     padding: 20px;
     border-right: 1px solid #dee2e6;
     transition: left 0.3s ease-in-out;
@@ -115,6 +114,13 @@ body {
 
     #hamburger {
         display: block !important;
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        z-index: 1100;
+        cursor: pointer;
+        font-size: 24px;
+        user-select: none;
     }
 }
 
