@@ -3,20 +3,19 @@
 Dự án Laravel tích hợp Docker.  
 ---
 
-### 🛠️ 1. Clone project
-
+### 1. Clone project
+```bash
 git clone https://github.com/NguyenTMDung/GosTest.git
 cd GosTest
+```
 
-###⚙️ 2. Tạo file .env
-bash
-Sao chép
-Chỉnh sửa
+### 2. Tạo file .env
+Copy file .env.example đổi tên thành .env
+```bash
 cp .env.example .env
-🐳 3. Tạo file docker-compose.yaml ở thư mục gốc:
-yaml
-Sao chép
-Chỉnh sửa
+```
+### 3. Tạo file docker-compose.yaml ở thư mục gốc với nội dung:
+```bash
 services:
   mydung_server:
     build:
@@ -44,26 +43,56 @@ services:
       - "3308:3306"
     volumes:
       - ./docker/mysql:/var/lib/mysql
-▶️ 4. Chạy Docker
-bash
-Sao chép
-Chỉnh sửa
-docker-compose up -d --build
-📦 5. Cài Composer (nếu chưa có thư mục vendor)
-bash
-Sao chép
-Chỉnh sửa
+```
+
+### 4. Tạo file docker/config/app.conf với nội dung
+```bash
+server {
+    listen 80;
+    server_name localhost;
+
+    root /var/www/html/public;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass 127.0.0.1:9000; 
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+
+### 5. Chạy Docker
+```bash
+docker-compose up -d --build 
+```
+sau đó chạy 'docker ps' kiểm tra xem bảo đảm đã có mydung_server và mydung_sql 
+
+### 6. Cài Composer (nếu chưa có thư mục vendor)
+```bash
 docker exec -it mydung_server composer install
-🔐 6. Generate key
-bash
-Sao chép
-Chỉnh sửa
+```
+
+### 7. Generate key
+```bash
 docker exec -it mydung_server php artisan key:generate
-🧬 7. Run migration và seed dữ liệu
-bash
-Sao chép
-Chỉnh sửa
+```
+
+### 8. Run migration và seed dữ liệu
+```bash
 docker exec -it mydung_server php artisan migrate --seed
+```
+
 🔗 Truy cập
 Website: http://localhost
 
@@ -71,40 +100,7 @@ PHP container: mydung_server
 
 MySQL: host 127.0.0.1, port 3308, user mydung, password mydung
 
-📁 Cấu trúc Docker
-lua
-Sao chép
-Chỉnh sửa
-.
-├── docker/
-│   ├── dockerfile
-│   ├── config/
-│   │   └── app.conf        # Nginx config
-│   ├── php-fpm/
-│   │   └── php-fpm.log
-│   ├── mysql/              # MySQL data
-│   └── nginx_log/          # Nginx log
-🧹 Các lệnh thường dùng
-Dừng container:
 
-bash
-Sao chép
-Chỉnh sửa
-docker-compose down
-Xem logs:
+```
 
-bash
-Sao chép
-Chỉnh sửa
-docker-compose logs -f
-Truy cập container PHP:
-
-bash
-Sao chép
-Chỉnh sửa
-docker exec -it mydung_server bash
 🐳 Lưu ý: Docker phải được cài trên máy trước. Tải tại: https://www.docker.com/products/docker-desktop
-
-css
-Sao chép
-Chỉnh sửa
