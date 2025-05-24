@@ -20,14 +20,10 @@
         </form>
     </div>
 
-    <div class="card p-4 shadow-sm">
-        <h4>Detailed Scores</h4>
-        <p>Detailed view of search scores here!</p>
-    </div>
-
-   @if(isset($score))
-        <div class="card p-3 mt-3">
-            <h5>Result for Registration Number: {{ $score->sbd }}</h5>
+    @if(isset($score))
+        <div class="card p-4 shadow-sm">
+            <h4>Detailed Scores</h4>
+            <p>Registration Number: {{ $score->sbd }}</p>
             <ul>
                 <li>Math: {{ $score->toan }}</li>
                 <li>Literature: {{ $score->ngu_van }}</li>
@@ -43,6 +39,7 @@
     @elseif(request()->has('sbd'))
         <div class="alert alert-warning mt-3">No score found for this registration number.</div>
     @endif
+
 
 @endsection
 
